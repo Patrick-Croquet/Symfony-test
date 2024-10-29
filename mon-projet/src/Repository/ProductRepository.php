@@ -31,6 +31,26 @@ class ProductRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+
+    /**
+    * Tous les produits d'une commande passée par un utilisateur.
+    *
+    * @param int $userID l'identifiant de l'utilisateur
+    *  
+    * @return Product[]
+    */
+    public function findProductsByUserID($userID): array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.commande', 'c')
+            ->andWhere('c.user = :userId')
+            ->setParameter('userId', $userID)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     //    public function findOneBySomeField($value): ?Product
     //    {
     //        return $this->createQueryBuilder('p')

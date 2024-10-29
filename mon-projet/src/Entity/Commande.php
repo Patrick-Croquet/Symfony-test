@@ -28,6 +28,9 @@ class Commande
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'commande')]
     private Collection $products;
 
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -91,6 +94,23 @@ class Commande
         }
 
         return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getId();
     }
 
 }

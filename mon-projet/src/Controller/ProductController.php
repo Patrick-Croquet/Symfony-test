@@ -9,14 +9,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product', name: 'product.index')]
-    public function index(ProductRepository $repository): Response
+    #[Route('/product/{id}', name: 'product.index')]
+    public function index(ProductRepository $productRepository, int $id): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $products = $repository->findAll();
+        //$products = $repository->findAll(); 
+        $products = $productRepository->findProductsByUserId($id);
         //$products = ['TV', 'Smartphone', 'Ordinateur'];
         return $this->render('product/index.html.twig', [
             'products' => $products,
+            'userId' => $id,
         ]);
     }
 }
