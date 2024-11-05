@@ -8,14 +8,14 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Liste des produits</h1>
-
+    <h1 class="text-3xl font-bold underline">
+        Liste des produits
+    </h1>
+    <p>&nbsp;</p>
     <ul>
     {% for product in products %}
         <li> {{ product.libelle }} </li>
     {% endfor %}
     </ul>
 
-</div>
 {% endblock %}
